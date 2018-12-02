@@ -43,7 +43,38 @@ fn part01(values : &Vec<String>) {
 }
 
 fn part02(values : &Vec<String>) {
+    let mut arr: [[i32; 250]; 250] = [[0; 250]; 250];
 
+    let mut max = 0;
+    let mut idx = 0;
+    let mut prt = 0;
+
+    for line_idx in 0..values.len() {
+        let line = &values[line_idx];
+        for partner_idx in (line_idx+1)..values.len() {
+            let partner = &values[partner_idx];
+            for chr in 0..line.len() {
+                if &line[chr..chr+1] == &partner[chr..chr+1] {
+                    arr[line_idx][partner_idx] += 1;
+                    if arr[line_idx][partner_idx] > max {
+                        max = arr[line_idx][partner_idx];
+                        idx = line_idx;
+                        prt = partner_idx;
+                    }
+                }
+            }
+        }
+    }
+
+    let line = &values[idx];
+    let partner = &values[prt];
+    print!("Part 02 result = ");
+    for chr in 0..line.len() {
+        if &line[chr..chr+1] == &partner[chr..chr+1] {
+            print!("{}", &line[chr..chr+1]);
+        }
+    }
+    print!("\n");
 }
 
 fn main() {
@@ -52,6 +83,5 @@ fn main() {
     let values = read_file_to_vec(file);
 
     part01(&values);
-
-    println!("Hello, world!");
+    part02(&values);
 }
