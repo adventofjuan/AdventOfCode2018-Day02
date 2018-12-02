@@ -1,0 +1,6 @@
+[package]
+name = "advent02"
+version = "0.1.0"
+authors = ["Bastian Koppelmann <kbastian@mail.uni-paderborn.de>"]
+
+[dependencies]
